@@ -185,6 +185,8 @@ public:
 			glFlush();
 
 			// Publish our submitted frame handle to Switchboard!
+			// TBH I have no idea whats going on here with openGL but we need to get and
+			// publish the latest frame from MXRE here
 			auto frame = new rendered_frame;
 			frame->texture_handles[0] = eyeTextures[0];
 			frame->texture_handles[1] = eyeTextures[1];
