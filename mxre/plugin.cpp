@@ -12,17 +12,20 @@ public:
     mxre_impl(const phonebook* const pb)
 		: sb{pb->lookup_impl<switchboard>()}
         , _m_cam_type{sb->subscribe_latest<imu_cam_type>("imu_cam")}
+        , _m_mxre_eyebuffer{sb->publish<rendered_frame>("mxre_eyebuffer")}
+
     { 
         // Init MXRE client and set up communication channels here
     }
 
     virtual void get_mxre_frame() const override {
-        // Call MXRE in here
+        // Call MXRE in here and publish the frame
 	}
 
 private:
 	const std::shared_ptr<switchboard> sb;
     std::unique_ptr<reader_latest<imu_cam_type>> _m_cam_type;
+    std::unique_ptr<writer<rendered_frame>> _m_mxre_eyebuffer;
 };
 
 class mxre_plugin : public plugin {
